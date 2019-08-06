@@ -58,6 +58,9 @@ app.use((req, res, next) => {
     error.status(404);
     next(error);
 })
+app.use('/',(req, res, next) => {
+    res.status(201).json({Message:'Welcome'})
+})
 
 app.use((error, req, res, next) => {
     res.status(error.err || 500);
