@@ -33,12 +33,12 @@ exports.create=async(req,res,next)=>{
         
 }
 
-exports.checkUser=(req,res,next)=>{
+exports.checkUser=async(req,res,next)=>{
     const id=req.body.member;
    console.log(id);
    
 
-         User.findOne({email:id})
+       await  User.findOne({email:id})
          .exec()
          .then(result=>{    
              if(result==null)
