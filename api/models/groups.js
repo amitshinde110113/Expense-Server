@@ -8,6 +8,7 @@ const groupSchema=mongoose.Schema({
     },
     users:[{type:Object}],
     expenses:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Expense' }],
+    usr:[{ type: mongoose.Schema.Types.ObjectId, ref: 'ExpenseUser' }],
     role:{type:String}
 
 });

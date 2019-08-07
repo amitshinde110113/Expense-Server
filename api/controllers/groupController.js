@@ -6,12 +6,15 @@ const User = require('../models/users');
 const Group = require('../models/groups');
 mongoose.set('useFindAndModify', false);
 const Expense = require('../models/expenses');
+
+
 exports.create=async(req,res,next)=>{
     console.log(req.body)
     const group = new Group({
         _id : new mongoose.Types.ObjectId(),
         users:req.body.members,
-        name:req.body.name
+        name:req.body.name,
+        usr:req.body.mm
       
            
         });
@@ -19,12 +22,11 @@ exports.create=async(req,res,next)=>{
           console.log("created",result);
           
           req.body.members.forEach(async(id,idx)=>{
-              console.log("///////////////////////////////////////////////////////////////",id);
+            
               
           await User.updateOne({_id: id._id},{$push:{groups:(result._id) }}).then(resp=>{
               if(idx===req.body.members.length-1){
-                  console.log("response*****************",resp);
-                  
+                
                 res.status(201).json({result})  
             }
             }).catch(error=>{console.log(error)}) 
@@ -62,7 +64,13 @@ exports.getGroup=(req,res,next)=>{
     console.log(email);
     
     User.findOne({email:email})
-         .populate("groups")
+         .populate({
+             path: "groups",
+             
+             populate: {
+                 path: "usr",path:"expenses"
+             }
+         })
          .then(result=>{    
              if(result==null)
              {
