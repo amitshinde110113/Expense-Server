@@ -11,7 +11,8 @@ exports.create=async(req,res,next)=>{
     const group = new Group({
         _id : new mongoose.Types.ObjectId(),
         users:req.body.members,
-        name:req.body.name
+        name:req.body.name,
+         usr:req.body.mm
       
            
         });
