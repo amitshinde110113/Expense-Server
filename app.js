@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 });
 
 
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads',express.static('uploads'));
 
 app.use('/users',userRoute)
 app.use('/groups',groupRoute)
@@ -57,9 +57,6 @@ app.use((req, res, next) => {
     const error = new Error("Not Found");
     error.status(404);
     next(error);
-})
-app.use('/',(req, res, next) => {
-    res.status(201).json({Message:'Welcome'})
 })
 
 app.use((error, req, res, next) => {
