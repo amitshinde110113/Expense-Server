@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 });
 
 
-app.use('/uploads',express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 
 app.use('/users',userRoute)
 app.use('/groups',groupRoute)
