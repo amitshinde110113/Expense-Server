@@ -24,7 +24,7 @@ mongoose.connect('mongodb+srv://amit_shinde:' +
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
-//app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
