@@ -66,9 +66,8 @@ exports.getGroup=(req,res,next)=>{
     User.findOne({email:email})
          .populate({
              path: "groups",
-             
              populate: {
-                 path: "usr",path:"expenses"
+                 path: "usr expenses"
              }
          })
          .then(result=>{    

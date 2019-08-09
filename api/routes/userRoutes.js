@@ -4,25 +4,33 @@ const router= express.Router();
 const userController=require('../controllers/userController')
 //const checkAuth=require('../middelware/check-auth');
 const multer=require('multer')
-
+var Jimp = require('jimp');
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
+      
       cb(null, './uploads/');
     },
     filename: function(req, file, cb) {
-      cb(null, new Date().toISOString() + file.originalname);
+      let filename =new Date().toISOString() + file.originalname+".png"
+     
+      cb(null, filename);
     }
   });
+ 
   
   const fileFilter = (req, file, cb) => {
     // reject a file
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+     
       cb(null, true);
     } else {
       cb(null, false);
     }
   };
   
+
+ 
+
   const upload = multer({
     storage: storage,
     limits: { fieldSize: 250 * 1024 * 1024 },
@@ -42,6 +50,9 @@ router.get('/:userId',userController.getUser);
 
 
 router.post('/login',userController.login);
+router.post('/getotp',userController.getOTP);
+router.post('/resetpassword',userController.resetPassword);
+
 
 
 // router.post('/forgetpassword',controller.forgertPassword)
