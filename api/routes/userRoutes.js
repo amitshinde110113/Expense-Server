@@ -52,6 +52,8 @@ router.get('/:userId',userController.getUser);
 router.post('/login',userController.login);
 router.post('/getotp',userController.getOTP);
 router.post('/resetpassword',userController.resetPassword);
+router.patch('/update',upload.single('profiePic'),userController.updateProfile);
+
 
 
 
